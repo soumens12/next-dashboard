@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
           <div className="flex flex-col flex-1 overflow-auto">
             <Header />
             {/* Main content area */}
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 mx-4 sm:mx-6 lg:mx-8">{children}</main>
           </div>
         </div>
 

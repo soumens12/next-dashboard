@@ -8,7 +8,7 @@ import ProductsTable from '@/components/ProductsTable';
 const ProductsPage = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <div className="w-full mx-auto py-6 px-4 lg:px-8">
+      <div className="w-full mx-auto py-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

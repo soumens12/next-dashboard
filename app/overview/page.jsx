@@ -19,7 +19,7 @@ const OverviewPage = () => {
     }, []);
   return (
     <div className="flex-1 relative z-10">
-      <main className="w-full mx-auto py-4 px-4 lg:px-4">
+      <main className="w-full mx-auto py-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
