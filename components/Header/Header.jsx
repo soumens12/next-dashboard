@@ -3,17 +3,26 @@ import Image from "next/image";
 import React from "react";
 import uk from "../../public/images/uk.png";
 import admin from "../../public/images/admin.jpg";
-import { Bell } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { motion } from "framer-motion";
 
-const Header = () => {
+const Header = ({onMenuClick}) => {
   return (
     <header className="bg-cyan-500/10 shadow-md border-b border-slate-900 mx-4 sm:mx-6 lg:mx-8 mt-4 mb-2 rounded-lg">
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 flex items-center justify-between">
-        <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-100">
-          Dashboard
-        </h1>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden p-2 rounded-full bg-linear-to-r from-[#0D8BFF] to-[#19F1FF] text-white transition-colors w-10 h-10 cursor-pointer hover:bg-slate-700 flex items-center justify-center"
+          >
+            <Menu size={24} />
+          </button>
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-100">
+            Dashboard
+          </h1>
+        </div>
+
         <div className="flex items-center space-x-3 sm:space-x-6">
           <Image
             src={uk}

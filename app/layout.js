@@ -1,17 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header/Header";
-import Sidebar from "@/components/Sidebar/Sidebar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import RootLayoutClient from "./RootLayoutClient";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,23 +6,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="flex h-screen overflow-hidden">
-          {/* Sidebar component can be placed here if needed */}
-          <Sidebar />
-          <div className="flex flex-col flex-1 overflow-auto">
-            <Header />
-            {/* Main content area */}
-            <main className="flex-1 mx-4 sm:mx-6 lg:mx-8">{children}</main>
-          </div>
-        </div>
-
-       
-      </body>
-    </html>
-  );
+  // Wrap children in Client Layout for hooks
+  return <RootLayoutClient>{children}</RootLayoutClient>;
 }

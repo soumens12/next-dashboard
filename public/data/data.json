@@ -6,15 +6,16 @@
       "icon": "House"
     },
     {
-      "name": "Sales",
-      "href": "/sales",
-      "icon": "DollarSign"
-    },
-    {
       "name": "Products",
       "href": "/products",
       "icon": "ShoppingBag"
     },
+    {
+      "name": "Sales",
+      "href": "/sales",
+      "icon": "DollarSign"
+    },
+
     {
       "name": "Orders",
       "href": "/orders",

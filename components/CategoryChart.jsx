@@ -22,7 +22,7 @@ const CategoryChart = () => {
       <h2 className="text-base md:text-lg font-medium mb-4 text-gray-100 text-center md:text-left">
         Category Distribution
       </h2>
-      <div className="h-64 md:h-80">
+      <div className="h-80 md:h-80">
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie

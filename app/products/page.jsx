@@ -1,11 +1,18 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
 import StatCard from '@/components/StatCard';
 import { ChartBarStacked, DollarSign, ShoppingBag, SquareActivity } from 'lucide-react';
 import ProductsTable from '@/components/ProductsTable';
+import StatCardSkeleton from '@/components/skeleton/StatCardSkeleton';
+import ProductsTableSkeleton from '@/components/skeleton/ProductsTableSkeleton';
 
 const ProductsPage = () => {
+  const [loading, setLoading] = useState(true);
+      useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 2000); // 2 sec delay
+        return () => clearTimeout(timer);
+      }, []);
   return (
     <div className="flex-1 overflow-auto relative z-10">
       <div className="w-full mx-auto py-4">
@@ -15,17 +22,36 @@ const ProductsPage = () => {
           transition={{ duration: 0.5 }}
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8"
         >
-          <StatCard name="Total Products" Icon={ShoppingBag} value="4,352" />
-          <StatCard name="Total Stock" Icon={SquareActivity} value="18, 000" />
-          <StatCard
-            name="Total Sold"
-            Icon={DollarSign}
-            value="12, 000"
-          />
-          <StatCard name="Total Categories" Icon={ChartBarStacked} value="$200,00" />
+          {loading ? (
+            <>
+              <StatCardSkeleton />
+              <StatCardSkeleton />
+              <StatCardSkeleton />
+              <StatCardSkeleton />
+            </>
+          ) : (
+            <>
+              <StatCard
+                name="Total Products"
+                Icon={ShoppingBag}
+                value="4,352"
+              />
+              <StatCard
+                name="Total Stock"
+                Icon={SquareActivity}
+                value="18, 000"
+              />
+              <StatCard name="Total Sold" Icon={DollarSign} value="12, 000" />
+              <StatCard
+                name="Total Categories"
+                Icon={ChartBarStacked}
+                value="$200,00"
+              />
+            </>
+          )}
         </motion.div>
 
-        <ProductsTable/>
+        {loading?<ProductsTableSkeleton/>:<ProductsTable/>}
       </div>
     </div>
   );

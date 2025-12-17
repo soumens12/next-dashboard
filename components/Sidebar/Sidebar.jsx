@@ -30,11 +30,10 @@ const Sidebar = () => {
   }, []);
   return (
     <div
-      className={`relative z-10 transition-all duration-300 ease-in-out shrink-0 ${
-        isSidebarOpen ? "w-64" : "w-20"
-      }`}
+      className={`relative hidden lg:flex z-10 transition-all duration-300 ease-in-out shrink-0
+  ${isSidebarOpen ? "w-64 min-w-64" : "w-20 min-w-20"}`}
     >
-      <div className="h-full bg-cyan-500/10 backdrop-blur-md p-4 flex flex-col">
+      <div className="h-full w-full bg-cyan-500/10 backdrop-blur-md p-4 flex flex-col">
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="p-2 rounded-full bg-linear-to-r from-[#0D8BFF] to-[#19F1FF] text-white transition-colors w-10 h-10 cursor-pointer hover:bg-slate-700 mb-6  flex items-center justify-center"

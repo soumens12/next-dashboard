@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const ITEMS_PER_PAGE=4;
 
 const ProductsTable = () => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // 🔹 Reset page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const products = [
     {
@@ -41,11 +49,51 @@ const ProductsTable = () => {
       price: "$15",
       stock: 150,
     },
+
+    {
+      id: 6,
+      name: "iPhone 15",
+      category: "Smartphones",
+      price: "$999",
+      stock: 120,
+    },
+    {
+      id: 7,
+      name: "MacBook Air M2",
+      category: "Laptops",
+      price: "$1299",
+      stock: 50,
+    },
+    {
+      id: 8,
+      name: "Gaming Mouse",
+      category: "Gaming Accessories",
+      price: "$59",
+      stock: 200,
+    },
+    {
+      id: 9,
+      name: "Sofa Set",
+      category: "Furniture",
+      price: "$450",
+      stock: 30,
+    },
+    {
+      id: 10,
+      name: "Face Wash",
+      category: "Beauty & Personal Care",
+      price: "$15",
+      stock: 150,
+    },
   ];
 
   const filtered = products.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedData = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
     <div className="bg-cyan-500/10 backdrop-blur-md overflow-hidden shadow-lg rounded-xl">
@@ -80,20 +128,20 @@ const ProductsTable = () => {
             </thead>
 
             <tbody>
-              {filtered.map((p) => (
-                <tr
-                  key={p.id}
-                  className="hover:bg-gray-800 transition border-b border-gray-700"
-                >
-                  <td className="p-3">{p.id}</td>
-                  <td className="p-3">{p.name}</td>
-                  <td className="p-3">{p.category}</td>
-                  <td className="p-3">{p.price}</td>
-                  <td className="p-3">{p.stock}</td>
-                </tr>
-              ))}
-
-              {filtered.length === 0 && (
+              {paginatedData.length > 0 ? (
+                paginatedData.map((p) => (
+                  <tr
+                    key={p.id}
+                    className="hover:bg-gray-800 transition border-b border-gray-700"
+                  >
+                    <td className="p-3">{p.id}</td>
+                    <td className="p-3">{p.name}</td>
+                    <td className="p-3">{p.category}</td>
+                    <td className="p-3">{p.price}</td>
+                    <td className="p-3">{p.stock}</td>
+                  </tr>
+                ))
+              ) : (
                 <tr>
                   <td colSpan="5" className="p-5 text-center text-gray-400">
                     No products found.
@@ -102,6 +150,31 @@ const ProductsTable = () => {
               )}
             </tbody>
           </table>
+
+          {/* PAGINATION */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-3 mt-4">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((p) => p - 1)}
+                className="px-3 py-1 border rounded disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              <span className="text-sm">
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((p) => p + 1)}
+                className="px-3 py-1 border rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
